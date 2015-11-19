@@ -66,6 +66,8 @@ set(SRC
 	src/fx/Lowpass.cpp
 	src/fx/Pitch.cpp
 	src/fx/PitchReader.cpp
+  src/fx/PhaseVocoder.cpp
+  src/fx/PhaseVocoderReader.cpp
 	src/fx/Reverse.cpp
 	src/fx/ReverseReader.cpp
 	src/fx/Sum.cpp
@@ -162,6 +164,8 @@ set(PUBLIC_HDR
 	include/fx/Lowpass.h
 	include/fx/Pitch.h
 	include/fx/PitchReader.h
+  include/fx/PhaseVocoder.h
+  include/fx/PhaseVocoderReader.h
 	include/fx/Reverse.h
 	include/fx/ReverseReader.h
 	include/fx/Sum.h

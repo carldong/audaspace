@@ -1,5 +1,6 @@
+
 /*******************************************************************************
- * Copyright 2009-2015 Jörg Müller
+ * Copyright 2009-2015 Rongcui Dong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,51 +18,42 @@
 #pragma once
 
 /**
- * @file PitchReader.h
+ * @file PhaseVocoder.h
  * @ingroup fx
- * The PitchReader class.
+ * The PhaseVocoder class.
  */
 
-#include "fx/EffectReader.h"
+#include "fx/Effect.h"
 
 AUD_NAMESPACE_BEGIN
 
 /**
- * This class reads another reader and changes it's pitch.
+ * This sound changes the pitch and speed of another sound with phase
+ * vocoder algorithm.
  */
-class AUD_API PitchReader : public EffectReader
+class AUD_API PhaseVocoder : public Effect
 {
 private:
 	/**
-   * The pitch level.
+	 * The phase vocoder.
 	 */
-	float m_pitch;
+	const float m_pitch;
+  const float m_speed;
 
 	// delete copy constructor and operator=
-	PitchReader(const PitchReader&) = delete;
-	PitchReader& operator=(const PitchReader&) = delete;
+	PhaseVocoder(const PhaseVocoder&) = delete;
+	PhaseVocoder& operator=(const PhaseVocoder&) = delete;
 
 public:
 	/**
-	 * Creates a new pitch reader.
-	 * \param reader The reader to read from.
-	 * \param pitch The pitch value.
+	 * Creates a new phase vocoder sound.
+	 * \param sound The input sound.
+	 * \param pitch The desired pitch.
+   * \param speed The desired speed
 	 */
-	PitchReader(std::shared_ptr<IReader> reader, float pitch);
+	PhaseVocoder(std::shared_ptr<ISound> sound, float pitch, float speed);
 
-	virtual Specs getSpecs() const;
-
-	/**
-	 * Retrieves the pitch.
-	 * \return The current pitch value.
-	 */
-	float getPitch() const;
-
-	/**
-	 * Sets the pitch.
-	 * \param pitch The new pitch value.
-	 */
-	void setPitch(float pitch);
+	virtual std::shared_ptr<IReader> createReader();
 };
 
 AUD_NAMESPACE_END

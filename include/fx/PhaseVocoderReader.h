@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2009-2015 Jörg Müller
+ * Copyright 2009-2015 Rongcui Dong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 #pragma once
 
 /**
- * @file PitchReader.h
+ * @file PhaseVocoderReader.h
  * @ingroup fx
  * The PitchReader class.
  */
@@ -27,27 +27,32 @@
 AUD_NAMESPACE_BEGIN
 
 /**
- * This class reads another reader and changes it's pitch.
+ * This class reads another reader and changes it's pitch and speed.
  */
-class AUD_API PitchReader : public EffectReader
+class AUD_API PhaseVocoderReader : public EffectReader
 {
 private:
 	/**
    * The pitch level.
 	 */
 	float m_pitch;
+  /**
+   * The speed scale
+   */
+  float m_speed;
 
 	// delete copy constructor and operator=
-	PitchReader(const PitchReader&) = delete;
-	PitchReader& operator=(const PitchReader&) = delete;
+	PhaseVocoderReader(const PhaseVocoderReader&) = delete;
+	PhaseVocoderReader& operator=(const PhaseVocoderReader&) = delete;
 
 public:
 	/**
-	 * Creates a new pitch reader.
+	 * Creates a new phase vocoder reader.
 	 * \param reader The reader to read from.
 	 * \param pitch The pitch value.
+   * \param speed The speed value
 	 */
-	PitchReader(std::shared_ptr<IReader> reader, float pitch);
+	PhaseVocoderReader(std::shared_ptr<IReader> reader, float pitch, float speed);
 
 	virtual Specs getSpecs() const;
 
@@ -62,6 +67,18 @@ public:
 	 * \param pitch The new pitch value.
 	 */
 	void setPitch(float pitch);
+
+	/**
+	 * Retrieves the speed.
+	 * \return The current speed value.
+	 */
+	float getSpeed() const;
+
+	/**
+	 * Sets the speed.
+	 * \param speed The new speed value.
+	 */
+	void setSpeed(float speed);
 };
 
 AUD_NAMESPACE_END
